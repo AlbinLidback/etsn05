@@ -51,6 +51,9 @@ CREATE TABLE foo(
     -- created is the fourth and final column with type TIMESTAMP. This column also has a default value
     -- which is created by the function CURRENT_TIMESTAMP() if not supplied during creation.
 
+    -- Writen by me--
+    total INT NOT NULL DEFAULT 1
+
     -- Here are some additional constraints that the data must relate to:
 
     PRIMARY KEY(foo_id),
@@ -62,5 +65,8 @@ CREATE TABLE foo(
     -- with the NOT NULL constraint above it is not possible to enter data that is not connected to a user.
     -- Note that there can be multiple rows with the same user_id (but the foo_id is unique for each row).
     -- The ON DELETE CASCADE ensures that when a user is deleted then all their foo data will also be deleted.
+    
+    -- Writen by me--
+    CHECK (total > 0)
 );
 

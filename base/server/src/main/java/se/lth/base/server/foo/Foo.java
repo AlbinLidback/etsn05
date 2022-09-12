@@ -36,6 +36,10 @@ public class Foo {
     public long getCreated() {
         return created;
     }
+
+    public int getTotal() {
+        return total;
+    }
 }
 
 

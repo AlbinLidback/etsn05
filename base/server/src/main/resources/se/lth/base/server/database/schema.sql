@@ -52,7 +52,7 @@ CREATE TABLE foo(
     -- which is created by the function CURRENT_TIMESTAMP() if not supplied during creation.
 
     -- Writen by me--
-    total INT NOT NULL DEFAULT 1
+    total INT NOT NULL DEFAULT 1,
 
     -- Here are some additional constraints that the data must relate to:
 
@@ -60,7 +60,7 @@ CREATE TABLE foo(
     -- This defines foo_id as the unique identifier of the table. It adds NOT NULL to the column and
     -- enforces that the values rows all have a unique identifier.
 
-    FOREIGN KEY(user_id) REFERENCES user(user_id) ON DELETE CASCADE
+    FOREIGN KEY(user_id) REFERENCES user(user_id) ON DELETE CASCADE,
     -- This informs that the column user_id is a relation to another table's primary key. In combination
     -- with the NOT NULL constraint above it is not possible to enter data that is not connected to a user.
     -- Note that there can be multiple rows with the same user_id (but the foo_id is unique for each row).

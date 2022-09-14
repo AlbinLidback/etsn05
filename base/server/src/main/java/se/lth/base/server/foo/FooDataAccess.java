@@ -49,7 +49,6 @@ public class FooDataAccess extends DataAccess<Foo> {
                 userId, payload, new Date(created));
         return new Foo(fooId, userId, payload, created);
     }
-    
 
     /**
      * @return all foo payload for all users.

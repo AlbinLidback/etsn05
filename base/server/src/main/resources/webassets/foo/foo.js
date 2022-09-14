@@ -22,6 +22,33 @@ base.fooController = function() {
             this.update(template.content.querySelector('tr'));
             const clone = document.importNode(template.content, true);
             // TODO: Add stuff from lab 2 end-2-end task here
+            this.fooRow = clone.querySelector('tr');
+
+            const buttons = clone.querySelectorAll('button');
+
+            // This function is called with the response from the server
+            const updateFoo = function(newTotal) {
+                viewModel.foo.total = newTotal;
+                viewModel.update(viewModel.fooRow);
+            };
+
+            // Decrement button onclick function
+            buttons[0].onclick = function(event) {
+                if (viewModel.foo.total == 1) {
+                    base.rest.deleteFoo(viewModel.foo.id).then(function() {
+                        viewModel.fooRow.parentElement.removeChild(viewModel.fooRow);
+                    });
+                } else {
+                    base.rest.updateFoo(viewModel.foo.id, viewModel.foo.total - 1).then(updateFoo);
+                }
+            };
+            // Increment button onclick function
+            buttons[2].onclick = function() {
+               // TODO: complete this (look at the decrement button).
+               base.rest.updateFoo(viewModel.foo.id, viewModel.foo.total + 1).then(updateFoo);
+            };
+
+
             template.parentElement.appendChild(clone);
         };
         // Update a single table row to display a foo
@@ -31,7 +58,10 @@ base.fooController = function() {
             const d = viewModel.foo.createdDate;
             tds[1].textContent = d.toLocaleDateString() + ' ' + d.toLocaleTimeString();
             // TODO: Add stuff from lab 1 here
-            tds[2].textContent = viewModel.foo.total;
+            const buttons = tds[2].querySelectorAll('button');
+            // TODO: do something with buttons[1]
+            //tds[2].textContent = viewModel.foo.total;
+            buttons[1].textContent = viewModel.foo.total;
         };
     };
 
